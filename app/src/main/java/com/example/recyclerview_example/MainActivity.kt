@@ -1,25 +1,32 @@
 package com.example.recyclerview_example
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tsumfilter.CustomAdapter
+import androidx.recyclerview.widget.ConcatAdapter
 
 class MainActivity : AppCompatActivity() {
     private lateinit var customAdapter: CustomAdapter
-
-
+    private lateinit var imageAdapter: ImageAdapter
+    lateinit var context: Context
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         title = "RecyclerView example"
-        var cwdstring = assets.list("tsumImages")
+        context = this.baseContext
+        var cwdstring = assets.list("tsumImages")!!
+
+        customAdapter = CustomAdapter(cwdstring,context)
+        imageAdapter = ImageAdapter(cwdstring,context)
+        val concatAdapter = ConcatAdapter(imageAdapter)
 
         val recyclerView: RecyclerView = findViewById(R.id.recyclerview)
-        customAdapter = CustomAdapter(cwdstring)
+
         val layoutManager = LinearLayoutManager(applicationContext)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = customAdapter
