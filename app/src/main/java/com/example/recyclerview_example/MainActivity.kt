@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.ConcatAdapter
 
 class MainActivity : AppCompatActivity() {
     private lateinit var customAdapter: CustomAdapter
-    private lateinit var imageAdapter: ImageAdapter
     lateinit var context: Context
 
 
@@ -22,8 +21,6 @@ class MainActivity : AppCompatActivity() {
         var cwdstring = assets.list("tsumImages")!!
 
         customAdapter = CustomAdapter(cwdstring,context)
-        imageAdapter = ImageAdapter(cwdstring,context)
-        val concatAdapter = ConcatAdapter(imageAdapter)
 
         val recyclerView: RecyclerView = findViewById(R.id.recyclerview)
 

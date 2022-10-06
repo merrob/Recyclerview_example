@@ -24,13 +24,16 @@ internal class CustomAdapter(private var itemsList: Array<String>,context: Conte
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.rowlayout, parent, false)
-        val itemTsumView = LayoutInflater.from(parent.context).inflate(R.layout.rowlayoutimage,parent,false)
         return MyViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = itemsList.get(position)
         holder.itemTextView.text = item
+
+        inputStream = assetManager.open("tsumImages/${item}")
+        resourceId = Drawable.createFromStream(inputStream, null)!!
+        holder.tsumImage.setImageDrawable(resourceId)
     }
 
     override fun getItemCount(): Int {
